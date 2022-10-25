@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "nodemon backend/server.js",
-    "heroku-postbuild": "cd app && cd frontend && npm install && npm run build "
+    
   },
   "author": "Janhavi Dhakate",
   "license": "ISC",
