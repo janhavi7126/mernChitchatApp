@@ -1,0 +1,27 @@
+{
+  "name": "chit-chat-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "engines": {
+    "node": "v16.14.2"
+  },
+  "scripts": {
+    "start": "nodemon backend/server.js",
+    "heroku-postbuild": "cd app && cd frontend && npm install && npm run build "
+  },
+  "author": "Janhavi Dhakate",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.1.3",
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.7",
+    "nodemon": "^2.0.20",
+    "socket.io": "^4.5.3"
+  }
+}
