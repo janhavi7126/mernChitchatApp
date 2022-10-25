@@ -51,8 +51,8 @@ const Login = () => {
         { email, password },
         headers
       );
-
-      // console.log(JSON.stringify(data));
+      console.log(data);
+      
       toast({
         title: "Login Successful",
         status: "success",

@@ -29,12 +29,13 @@ const registerUser = asynchandler(async(req,res)=>{
 
         if(user){
             console.log("creating")
-            res.status(201).json({
+            res.json({
                 _id :user._id,
                 name:user.name,
                 email:user.email,
+                token:generateToken(user._id),
                 pic : user.pic,
-                token:generateToken(user._id)
+                
             });
         }else{
             res.status(400);
@@ -65,7 +66,7 @@ const authUser = asynchandler(async(req,res) =>{
 })
 
 const allUser = asynchandler(async(req,res)=>{
-    console.log(req.body)
+    console.log(req.body,"h")
     const keyword = req.query.search ?{
         $or:[
             {name:{$regex: req.query.search, $options: "i"}},

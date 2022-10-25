@@ -63,14 +63,18 @@ const SideDrawer = () => {
     try {
       setLoading(true);
 
-      const headers = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      };
+      const config = {
+        headers:{
+          
+          Authorization:`Bearer ${user.token}`
+        }
+      }
+      
+      
+      const { data } = await axios.get(`/api/user?search=${search}`,config);
 
-      const { data } = await axios.get(`/api/user?search=${search}`, headers);
       console.log(data);
+
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -208,9 +212,11 @@ const SideDrawer = () => {
                 mr={1.5}
                 maxW="77%"
                 value={search}
+                
                 onChange={(e) => setSearch(e.target.value)}
               />
               <Button onClick={handleSearch}>Go</Button>
+            
             </Box>
             {loading ? (
               <ChatLoading />
