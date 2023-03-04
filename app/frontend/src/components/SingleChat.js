@@ -12,6 +12,7 @@ import io from 'socket.io-client'
 import ScrollableChat from './ScrollableChat'
 import Lottie from 'react-lottie'
 import animationData from "../Animations/typing.json"
+import "./style.css";
 
 
 const defaultOptions = {
@@ -24,7 +25,7 @@ const defaultOptions = {
 };
 
 
-const ENDPOINT ="https://chit--chat-app.herokuapp.com/" 
+const ENDPOINT ="https://mernchitchatappserverjd.onrender.com";
 var socket,selectedChatCompare; 
 
 
@@ -140,7 +141,8 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
           selectedChatCompare._id !== newMessageRecieved.chat._id
         ) {
           if (!notification.includes(newMessageRecieved)) {
-            setNotification([newMessageRecieved, ...notification]);
+            setNotification([newMessageRecieved,...notification]);
+            
             setFetchAgain(!fetchAgain);
           }
         } else {
@@ -209,8 +211,7 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
             flexDir="column"
             justifyContent="flex-end"
             p={3}
-            backgroundImage={image}
-            
+            backgroundImage={image}            
             w="100%"
             h="100%"
             borderRadius="lg"
@@ -224,8 +225,8 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
                 alignSelf="center"
                 margin="auto"/>
             ):(
-                <div className='messages'>
-                  <ScrollableChat messages={messages} overflowY='scroll' />
+                <div  className='messages' >
+                  <ScrollableChat  messages={messages} />
             
                 </div>
             )}

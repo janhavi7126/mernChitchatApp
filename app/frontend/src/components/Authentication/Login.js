@@ -61,6 +61,7 @@ const Login = () => {
         position: "bottom",
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
+      window.location.reload(true);
       setLoading(false);
       history.push("/chats");
     } catch (error) {

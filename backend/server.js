@@ -1,13 +1,14 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const { chats } = require("../backend/data/data");
-const connectdb = require("../backend/config/db");
+const { chats } = require("./data/data");
+const connectdb = require("./config/db");
 const colors = require("colors");
-const userRoutes = require("../backend/routes/userRoutes");
-const chatRoutes = require("../backend/routes/chatRoutes");
-const messageRoutes = require("../backend/routes/messageRoutes");
+const userRoutes = require("./routes/userRoutes");
+const chatRoutes = require("./routes/chatRoutes");
+const notificationRoutes = require("./routes/notificationRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 const { notFound, errorHandler } = require("./middlewares/errormiddleware");
-const { Socket } = require("socket.io");
+
 const path = require("path");
 
 dotenv.config();
@@ -16,11 +17,12 @@ const app = express();
 
 app.use(express.json());
 
-console.log("fg");
+
 
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 const __dirname1 = path.resolve();
 
@@ -29,6 +31,7 @@ if (process.env.NODE_ENV === "production") {
   console.log(
     path.resolve(__dirname1, "app", "frontend", "build", "index.html")
   );
+
   app.get("*", (req, res) =>
     res.sendFile(
       path.join(__dirname1, "app", "frontend", "build", "index.html")
@@ -40,18 +43,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// app.post('/api/chat',(req,res) => {
-//     console.log(req.body);
-// })
-
-// app.get('/api/chat/:id',(req,res) =>{
-//     console.log(req.params.id)
-// })
-
-// app.get('/api/chat/:id',(req,res) =>{
-//    const Singlechat = chats.find((c) => c._id === req.params.id);
-//    res.send(Singlechat);
-// })
 
 app.use(notFound);
 app.use(errorHandler);
@@ -62,19 +53,18 @@ const server = app.listen(
   console.log(`Server started on port ${PORT}`.yellow.bold)
 );
 
-const io = require("socket.io")(server, {
+const io = require("socket.io")(server,{
   pingTimeout: 60000,
   cors: {
-    orgin: "http://localhost:3000",
+    origin: "http://localhost:3000",
+    // credentials: true,
   },
 });
 
 io.on("connection", (socket) => {
-  console.log("connected to socket.io");
-
+  console.log("Connected to socket.io");
   socket.on("setup", (userData) => {
     socket.join(userData._id);
-    // console.log(userData._id)
     socket.emit("connected");
   });
 

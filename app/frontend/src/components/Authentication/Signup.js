@@ -98,13 +98,14 @@ const Signup = () => {
           "Content-type": "application/json",
         }
     
-      const  { data }  =  await axios.post(
+      const  {data}  = await axios.post(
         "/api/user",
         {
           name,
           email,
           password,
-          pic},headers
+          pic,
+        },headers
       );
       console.log(data);
       toast({
@@ -114,7 +115,8 @@ const Signup = () => {
         isClosable: true,
         position: "bottom",
       });
-
+      window.location.reload(true);
+      window.location.reload(true);
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
       history.push("/chats");

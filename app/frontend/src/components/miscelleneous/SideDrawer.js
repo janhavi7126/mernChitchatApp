@@ -138,11 +138,7 @@ const SideDrawer = () => {
         <Box>
           <Menu>
             <MenuList>
-              <ProfileModel user={user} />
-              <MenuItem>
-                <ProfileModel user={user} />
-                My Profile
-              </MenuItem>
+              <MenuItem><ProfileModel user={user} /> My Profile</MenuItem>
               <MenuDivider />
               <MenuItem onClick={LogoutUser}>Logout</MenuItem>
             </MenuList>
@@ -183,15 +179,15 @@ const SideDrawer = () => {
               <BellIcon fontSize="2xl" m={1} />
             </MenuButton>
             <MenuList pl={2}>
-              {!notification.length && "No New Messages"}
-              {notification.map((notif) => (
+            {!notification.length && "No New Messages"}
+              {notification.map((notif) => ( 
                 <MenuItem
                    key={notif._id}
-                  onClick={() => {
+                   onClick={() => {
                     setSelectedChat(notif.chat);
                     setNotification(notification.filter((n) => n !== notif));
                   }}
-                >
+                >Hello
                   {notif.chat.isGroupChat
                     ? `New Message in ${notif.chat.chatName}`
                     : `New Message from ${getSender(user, notif.chat.users)}`}

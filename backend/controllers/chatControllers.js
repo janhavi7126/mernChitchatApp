@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Chat = require("../models/chatModel");
 const User = require("../models/userModel");
-console.log("uu")
+
 
 const accessChat = asyncHandler(async (req, res) => {
   const { userId } = req.body
@@ -12,7 +12,7 @@ const accessChat = asyncHandler(async (req, res) => {
     return res.sendStatus(400);
   }
  
-  console.log(0)
+
   var isChat = await Chat.find({
     isGroupChat: false,
     $and: [
